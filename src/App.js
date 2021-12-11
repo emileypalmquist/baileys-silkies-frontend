@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { Switch, Route } from "react-router-dom";
+import styled from "styled-components";
+import "./App.css";
+import { AboutPage, CoopsPage, AvailablePage, CoopPage } from "./pages";
+import { Navbar, Footer, Header } from "./components";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Navbar />
+      <MainContainer>
+        <Switch>
+          <Route exact path="/">
+            <AboutPage />
+          </Route>
+          <Route exact path="/coops">
+            <CoopsPage />
+          </Route>
+          <Route path="/coops/:id/available-chicks">
+            <AvailablePage />
+          </Route>
+          <Route exact path="/coops/:id">
+            <CoopPage />
+          </Route>
+          <Route path="/available-chicks">
+            <AvailablePage />
+          </Route>
+        </Switch>
+      </MainContainer>
+      <Footer />
     </div>
   );
 }
 
 export default App;
+
+const MainContainer = styled.main`
+  min-height: calc(100vh - 29vh);
+`;
