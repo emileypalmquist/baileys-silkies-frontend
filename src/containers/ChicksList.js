@@ -1,9 +1,22 @@
 import { ChickCard } from "../components";
 import { CardContainer } from "../styles";
 
-export default function ChicksList({ chicks }) {
+export default function ChicksList({
+  admin,
+  chicks,
+  setChicks,
+  coops,
+  setCoops,
+}) {
   const renderChicks = chicks.map((chick) => (
-    <ChickCard key={chick.id} chick={chick} />
+    <ChickCard
+      key={chick.id}
+      admin={admin}
+      chick={chick}
+      setChicks={setChicks}
+      coops={coops}
+      setCoops={setCoops}
+    />
   ));
 
   return (

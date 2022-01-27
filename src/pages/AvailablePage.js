@@ -6,9 +6,8 @@ import { calculateWeeks } from "../helpers/calculations";
 import { AgeFilter, SexFilter, Errors } from "../components";
 import { ChicksList } from "../containers";
 
-function AvailablePage() {
+function AvailablePage({ admin, coops, setCoops }) {
   const [errors, setErrors] = useState([]);
-  const [coop, setCoop] = useState(null);
   const [chicks, setChicks] = useState([]);
   const [over8, setOver8] = useState(false);
   const [between6And8, setBetween6And8] = useState(false);
@@ -19,23 +18,17 @@ function AvailablePage() {
 
   const { id } = useParams();
 
-  function handleCoop({ id, name, description, available_chickens }) {
-    setCoop({ id, name, description });
-    setChicks(available_chickens);
-  }
-
   function handleErrors(errors) {
     setErrors(errors);
     setChicks([]);
-    setCoop(null);
   }
 
   function getChicks() {
     setErrors([]);
     if (id) {
-      getAvailableChicksCoop(id, handleCoop, handleErrors);
+      // can refactor to get only chickens from particular cooop with query params
+      getAvailableChicksCoop(id, setChicks, handleErrors);
     } else {
-      setCoop(null);
       getAllAvailableChicks(setChicks, handleErrors);
     }
   }
@@ -76,8 +69,6 @@ function AvailablePage() {
     }
   }
 
-  const title = coop && <h2>{coop.name} Coop</h2>;
-
   // need to get feather_types and colors for filters
   return (
     <>
@@ -103,8 +94,14 @@ function AvailablePage() {
           onClick={() => setNakedNeck((current) => !current)}
         />
       </label>
-      {title}
-      <ChicksList chicks={filterNakedNeck()} />
+
+      <ChicksList
+        admin={admin}
+        chicks={filterNakedNeck()}
+        setChicks={setChicks}
+        coops={coops}
+        setCoops={setCoops}
+      />
     </>
   );
 }

@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from "react";
-
 import { CardContainer } from "../styles";
-import { getCoops } from "../helpers/api";
 import { CoopCard } from "../components";
 
-function CoopsPage() {
-  const [coops, setCoops] = useState([]);
-  const [errors, setErrors] = useState([]);
-
-  useEffect(() => {
-    getCoops(setCoops, setErrors);
-  }, []);
-
+function CoopsPage({ coops, admin }) {
   const renderCoops = coops.map((coop) => (
-    <CoopCard key={coop.id} coop={coop} />
+    <CoopCard key={coop.id} coop={coop} admin={admin} />
   ));
 
   return (
