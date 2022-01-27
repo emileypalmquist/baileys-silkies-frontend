@@ -5,7 +5,7 @@ import { Input, Label, FormField, Select } from "../../styles";
 import { Errors } from "..";
 import { createChicken } from "../../helpers/api";
 
-export default function ChickenForm({ coops, setCoops, chick }) {
+export default function ChickenForm({ coops, setCoops, chick, action }) {
   const [chicken, setChicken] = useState(initialChicken);
   const [errors, setErrors] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -38,15 +38,27 @@ export default function ChickenForm({ coops, setCoops, chick }) {
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    createChicken(chicken, onSuccess, setErrors);
+    if (action === "create") {
+      createChicken(chicken, onSuccess, onFailure);
+    } else if (action === "update") {
+      //update chicken
+      setLoading(false);
+    } else {
+      console.log("something went wrong");
+    }
+  }
+
+  function onFailure(errors) {
+    setErrors(errors);
+    setLoading(false);
   }
 
   function onSuccess(chicken) {
     setLoading(false);
 
     const newCoops = coops.map((coop) =>
-      coop.id === chicken.coopId
-        ? { ...coop, available_chickens: [...coop.available_chickens, chicken] }
+      coop.id === chicken.coop_id
+        ? { ...coop, available_count: coop.available_count + 1 }
         : coop
     );
 

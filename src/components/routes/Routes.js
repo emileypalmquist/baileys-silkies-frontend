@@ -1,5 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import { AboutPage, CoopsPage, AvailablePage, CoopPage } from "../../pages";
+import { CoopAvailable } from "../../containers";
 
 export default function Routes({ coops, setCoops, admin }) {
   return (
@@ -11,10 +12,10 @@ export default function Routes({ coops, setCoops, admin }) {
         <CoopsPage coops={coops} admin={admin} />
       </Route>
       <Route path="/coops/:id/available-chicks">
-        <AvailablePage admin={admin} coops={coops} setCoops={setCoops} />
+        <CoopAvailable admin={admin} coops={coops} setCoops={setCoops} />
       </Route>
       <Route exact path="/coops/:id">
-        <CoopPage admin={admin} />
+        <CoopPage admin={admin} coops={coops} />
       </Route>
       <Route path="/available-chicks">
         <AvailablePage admin={admin} coops={coops} setCoops={setCoops} />

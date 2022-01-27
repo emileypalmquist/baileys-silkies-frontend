@@ -15,8 +15,9 @@ export default function ChickCard({
     photo,
     coop_id,
   },
-  chick,
   admin,
+  chick,
+  setChicks,
   coops,
   setCoops,
 }) {
@@ -36,21 +37,18 @@ export default function ChickCard({
         circular
         name="trash alternate outline"
         onClick={() => deleteChicken(id, handleDeleted)}
-        // onClick={() => handleDeleted()}
       />
     </p>
   );
 
   function handleDeleted() {
     const coop = coops.find((coop) => coop.id === coop_id);
-    const updatedCoop = {
-      ...coop,
-      available_chickens: coop.available_chickens.filter(
-        (chick) => chick.id !== id
-      ),
-    };
+    const updatedCoop = { ...coop, available_count: coop.available_count - 1 };
     setCoops((currentCoops) =>
       currentCoops.map((coop) => (coop.id === coop_id ? updatedCoop : coop))
+    );
+    setChicks((currentChicks) =>
+      currentChicks.filter((chick) => chick.id !== id)
     );
   }
 
@@ -63,7 +61,12 @@ export default function ChickCard({
     >
       <Modal.Header>Select a Photo</Modal.Header>
       <Modal.Content>
-        <ChickenForm coops={coops} setCoops={setCoops} chick={chick} />
+        <ChickenForm
+          coops={coops}
+          setCoops={setCoops}
+          chick={chick}
+          action="update"
+        />
       </Modal.Content>
       <Modal.Actions>
         <Icon name="checkmark" onClick={() => setOpen(false)} />
@@ -83,5 +86,3 @@ export default function ChickCard({
     />
   );
 }
-
-// displayed in extra of card

@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Card, Button, Image } from "semantic-ui-react";
 
 export default function CoopCard({
-  coop: { id, name, available_chickens, description, photo },
+  coop: { id, name, available_count, description, photo },
   admin,
 }) {
   // const history = useHistory();
@@ -31,7 +31,7 @@ export default function CoopCard({
       // meta={description}
       description={
         <Link to={`/coops/${id}/available-chicks`}>
-          {available_chickens.length} chicks available
+          {available_count} chicks available
         </Link>
       }
       extra={extra}

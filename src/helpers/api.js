@@ -21,8 +21,8 @@ function getAllAvailableChicks(handleOk, handleErrors) {
 }
 
 function getAvailableChicksCoop(id, handleOk, handleErrors) {
-  return fetch(BASE_URL + `/coops/${id}`).then((response) =>
-    handleResponse(response, handleOk, handleErrors)
+  return fetch(BASE_URL + `/available_chickens?coop_id=${id}`).then(
+    (response) => handleResponse(response, handleOk, handleErrors)
   );
 }
 

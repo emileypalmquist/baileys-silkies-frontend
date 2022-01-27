@@ -14,7 +14,7 @@ export default function AdminRoutes({ admin, setAdmin, coops, setCoops }) {
         <CoopForm setCoops={setCoops} />
       </Route>
       <Route path="/admin/add-chicken">
-        <ChickenForm coops={coops} setCoops={setCoops} />
+        <ChickenForm coops={coops} setCoops={setCoops} action="create" />
       </Route>
     </Switch>
   );

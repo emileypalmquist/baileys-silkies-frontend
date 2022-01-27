@@ -1,35 +1,31 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { getAvailableChicksCoop } from "../helpers/api";
+// import { getAvailableChicksCoop } from "../helpers/api";
 import { Errors } from "../components";
-import { ChicksList } from "../containers";
+// import { ChicksList } from "../containers";
 
-const initialCoop = { available_chickens: [] };
-
-export default function CoopPage({ admin }) {
+export default function CoopPage({ admin, coops }) {
   const [errors, setErrors] = useState([]);
-  const [coop, setCoop] = useState(initialCoop);
+  // const [chickens, setChickens] = useState([])
+
   const { id } = useParams();
-  const { name, description, available_chickens } = coop;
+  const coop = coops.find((c) => c.id === parseInt(id));
 
-  useEffect(getCoop, [id]);
+  if (!coop) return <div>No Coop Found</div>;
 
-  function getCoop() {
-    getAvailableChicksCoop(id, setCoop, handleErrors);
-  }
+  // useEffect(getCoopsChickens, [id]);
 
-  function handleErrors(errors) {
-    setErrors(errors);
-    setCoop(initialCoop);
-  }
+  // function getCoopsChickens() {
+  //   getAvailableChicksCoop(id, setChickens, setErrors);
+  // }
 
+  const { name, description } = coop;
   return (
     <>
       <Errors errors={errors} />
       <h2>{name}</h2>
       <p>{description}</p>
-      <ChicksList chicks={available_chickens} admin={admin} />
     </>
   );
 }
