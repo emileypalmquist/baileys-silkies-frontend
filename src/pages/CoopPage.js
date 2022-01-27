@@ -7,7 +7,7 @@ import { ChicksList } from "../containers";
 
 const initialCoop = { available_chickens: [] };
 
-export default function CoopPage() {
+export default function CoopPage({ admin }) {
   const [errors, setErrors] = useState([]);
   const [coop, setCoop] = useState(initialCoop);
   const { id } = useParams();
@@ -29,7 +29,7 @@ export default function CoopPage() {
       <Errors errors={errors} />
       <h2>{name}</h2>
       <p>{description}</p>
-      <ChicksList chicks={available_chickens} />
+      <ChicksList chicks={available_chickens} admin={admin} />
     </>
   );
 }

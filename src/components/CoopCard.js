@@ -1,8 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
-import { Card, Button } from "semantic-ui-react";
+import { Card, Button, Image } from "semantic-ui-react";
 
 export default function CoopCard({
-  coop: { id, name, available_chickens, description },
+  coop: { id, name, available_chickens, description, photo },
+  admin,
 }) {
   // const history = useHistory();
 
@@ -26,7 +27,7 @@ export default function CoopCard({
     <Card
       style={{ margin: "1em" }}
       header={name}
-      image="https://www.mypetchicken.com/images/product_images/Popup/White-Silkie-2190-L.jpg"
+      image={<Image src={photo} alt={name} wrapped />}
       // meta={description}
       description={
         <Link to={`/coops/${id}/available-chicks`}>

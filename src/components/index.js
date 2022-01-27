@@ -6,3 +6,8 @@ export { default as AgeFilter } from "./AgeFilter";
 export { default as SexFilter } from "./SexFilter";
 export { default as ChickCard } from "./ChickCard";
 export { default as Errors } from "./Errors";
+export { default as Routes } from "./routes/Routes";
+export { default as AdminRoutes } from "./routes/AdminRoutes";
+export { default as Login } from "./admin/Login";
+export { default as CoopForm } from "./admin/CoopForm";
+export { default as ChickenForm } from "./admin/ChickenForm";

@@ -6,7 +6,7 @@ import { calculateWeeks } from "../helpers/calculations";
 import { AgeFilter, SexFilter, Errors } from "../components";
 import { ChicksList } from "../containers";
 
-function AvailablePage() {
+function AvailablePage({ admin, coops, setCoops }) {
   const [errors, setErrors] = useState([]);
   const [coop, setCoop] = useState(null);
   const [chicks, setChicks] = useState([]);
@@ -104,7 +104,12 @@ function AvailablePage() {
         />
       </label>
       {title}
-      <ChicksList chicks={filterNakedNeck()} />
+      <ChicksList
+        chicks={filterNakedNeck()}
+        admin={admin}
+        coops={coops}
+        setCoops={setCoops}
+      />
     </>
   );
 }
